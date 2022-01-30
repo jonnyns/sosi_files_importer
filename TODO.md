@@ -1,0 +1,17 @@
+- SOSI file charsets - any more?
+- auto frame all after import
+- Blender scale factor, use or delete
+- Metric vs Imperial from import data, correct handled?
+- Warning if clip-end < actual coords
+- Warning if actual coords excessivly large
+- Layer name prefix in dialog removed or hidden
+- Sort button in dialog removed or hidden
+- Logging levels throughout (remove print())
+- Collection levels grouped together
+- Usage description
+- Test data files (without ref and with ref)
+- Error result split in error + cause
+- Check local codepage
+- "from ." also in Spyder
+- Describe why ref point
+- Calculate number of points for BUE
