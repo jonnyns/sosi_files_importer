@@ -16,3 +16,4 @@
 - [ ] Describe why ref point
 - [ ] Calculate number of points for BUE
 - [x] Add Python code for BUE rotation/translation
+- [ ] Add Python Options file for specific options
