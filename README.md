@@ -12,4 +12,8 @@ It is not recommended to install the addon using the sources directly. Instead, 
 
 Currently, this addon has only been tested with Blender 3.0 and Windows10.
 
-# Usage
+## Usage
+
+Activate the importer from the *File/Import/Import SOSI Data* menu item.
+
+The importer will then open a file selection dialog expecting a Reference coordinate specification.
