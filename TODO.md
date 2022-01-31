@@ -17,4 +17,4 @@
 - [x] Add Settings file (Python) for specific settings
 - [x] Auto calculate number of points for BUE according to settings
 - [x] Add Python code for BUE rotation/translation
-
+- [ ] Doc: Available settings
