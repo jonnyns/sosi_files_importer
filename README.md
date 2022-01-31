@@ -11,3 +11,5 @@ The *scripts* directory contains the sources for the Python code necessary to in
 It is not recommended to install the addon using the sources directly. Instead, please use the packaged contents in the *release page*. The packaged zip-file can be directly installed from the *Install...* button in the *Blender Preferences* dialog.
 
 Currently, this addon has only been tested with Blender 3.0 and Windows10.
+
+# Usage
