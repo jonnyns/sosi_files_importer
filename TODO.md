@@ -3,6 +3,7 @@
 - [ ] Blender scale factor, use or delete
 - [ ] Metric vs Imperial from import data, correctly handled?
 - [ ] Warning if clip-end < actual coords
+- [ ] Blender automated end-clip?
 - [ ] Warning if actual coords excessivly large
 - [ ] Layer name prefix in dialog removed or hidden
 - [ ] Sort button in dialog removed or hidden
