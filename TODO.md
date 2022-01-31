@@ -1,4 +1,6 @@
-- [ ] SOSI file charsets - add any more/complete?
+- [ ] Check user codepage
+- [ ] SOSI file charsets: add more?
+- [ ] SOSI file charsets: complete for other than æ, ø, å, Æ, Ø, Å?
 - [ ] Blender auto frame all after import
 - [ ] Blender scale factor, use or delete
 - [ ] Metric vs Imperial from import data, correctly handled?
@@ -12,7 +14,6 @@
 - [ ] Usage description
 - [x] Include simple test data .sos files to verify importer functionality
 - [ ] Error result split in error + cause
-- [ ] Check local codepage
 - [x] Reorganize as Package for identical code in Blender and Spyder
 - [ ] Doc: Explain reference coordinate used to bring model close(r) to origin
 - [x] Add Settings file (Python) for specific settings
