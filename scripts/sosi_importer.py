@@ -1,8 +1,27 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Oct 16 01:05:15 2021
+Copyright © 2022 Jonny Normann Skålvik
 
-@author: Jonny
+Permission is hereby granted, free of charge, to any person obtaining a copy 
+of this software and associated documentation files (the “Software”), to deal 
+in the Software without restriction, including without limitation the rights 
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
+copies of the Software, and to permit persons to whom the Software is 
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in 
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+SOFTWARE.
+
+This file is part of SosiImporter, an addon to import SOSI files containing
+3D model data into Blender.
 """
 
 import bpy
@@ -11,6 +30,10 @@ import sys
 import numpy as np
 import ctypes
 from ctypes import wintypes
+from . import sosi_log_helper as sologhlp
+from . import sosi_geom_helper as sogeohlp
+
+# -----------------------------------------------------------------------------
 
 RES_SOSI_GENERAL_ERROR	    = 0x0001
 RES_SOSI_DIMENSION_MISMATCH = 0x0010
@@ -19,7 +42,7 @@ RES_SOSI_LOOP_UNCLOSED      = 0x0100
 #C = bpy.context
 #D = bpy.data
 
-# Determine if the code is running from within Belnder
+# Determine if the code is running from within Blender
 in_blender = True
 try:
     import bpy
@@ -48,6 +71,7 @@ c_double = ctypes.c_double
 c_void_p = ctypes.c_void_p
 c_char_p = ctypes.c_char_p
 
+# -----------------------------------------------------------------------------
 
 def coord_array_to_list(ndims, ncoords, ary):
     coordList = []
@@ -59,12 +83,14 @@ def coord_array_to_list(ndims, ncoords, ary):
             coordList.append((ary[i * 3], ary[i * 3 + 1], ary[i * 3 + 2]))
     return coordList
 
+# -----------------------------------------------------------------------------
 
 def get_full_path(rel_path):
     dir_path = os.path.dirname(os.path.realpath(__file__))
     head_path, tail_path = os.path.split(dir_path)
     return os.path.join(head_path, rel_path)
 
+# -----------------------------------------------------------------------------
 
 def free_library(handle):
     kernel32 = ctypes.WinDLL('kernel32', use_last_error=True)
@@ -74,6 +100,7 @@ def free_library(handle):
     kernel32.FreeLibrary.restype = wintypes.BOOL
     kernel32.FreeLibrary(handle)
 
+# -----------------------------------------------------------------------------
 
 # Function will be called per sosi object and return ptr to object name, ptr to coordinate array 
 def my_cb_func(id, objrefnum, sosires, pobjname, ndims, ncoords, pcoord_ary, pfilename):
@@ -118,11 +145,24 @@ def my_cb_func(id, objrefnum, sosires, pobjname, ndims, ncoords, pcoord_ary, pfi
         bpy.ops.mesh.edge_face_add() # Make the ngon
         #bpy.ops.mesh.quads_convert_to_tris(quad_method='BEAUTY', ngon_method='BEAUTY') # Triangulate
         bpy.ops.object.mode_set(mode = 'OBJECT')
+    elif (sodhlp.SosiObjId(id) == sodhlp.SosiObjId.BUEP):
+        print("A", coord_list)
+        num_segs = 8
+        arc_seg_pts = sogeohlp.arc_pts_segments_3D(coord_list, num_segs)
+        print("B", arc_seg_pts)
+        edg_list = sodhlp.points_to_edglist(arc_seg_pts)
+        #print("B", edg_list)
+        ob = bldhlp.Mesh.point_cloud(objname, arc_seg_pts, edg_list)
+        #bpy.context.collection.objects.link(ob)
+        coll.objects.link(ob)
+        print ('BUEP {}: Res= 0x{:x} NoOfCoords= {}'.format(objrefnum, sosires, ncoords))
         
     return 0
 
+# -----------------------------------------------------------------------------
 
 def do_imports():
+    logger = sologhlp.get_logger()	
     #rel_path = 'bin\\x64\\JoNoS_Blender_SosiLib.dll'
     #rel_path = 'x64\\Debug\\JoNoS_Blender_SosiLib.dll'
     #dll_path = get_full_path(rel_path)

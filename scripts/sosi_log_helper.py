@@ -24,31 +24,42 @@ This file is part of SosiImporter, an addon to import SOSI files containing
 3D model data into Blender.
 """
 
-from enum import Enum
+import numpy as np
+import logging
 
 # -----------------------------------------------------------------------------
 
-class SosiObjId(Enum):
-    UKJENT = 0
-    PUNKT = 1
-    KURVE = 2
-    FLATE = 3
-    BUEP = 4
+# Debug levels:
+# CRITICAL  50
+# ERROR 	40
+# WARNING 	30
+# INFO      20
+# DEBUG 	10
+# NOTSET 	0
+
+def get_logger():
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
+    logger.info('Logger initialized')
+    return logger
 
 # -----------------------------------------------------------------------------
 
-# pntlst: sequential list of points
-# return list of point indices defining edges
-def points_to_edglist(pntlst):
-    edglst = []
-    for i in range(1, len(pntlst)):
-        edglst.append((i - 1, i))
-    return edglst
-
+def printArray(ary):
+    for row in range(len(ary)):
+        for col in range (len(ary[row])):
+            print("{:8.3f}".format(ary[row][col]), end = " ")
+        print()
+        
 # -----------------------------------------------------------------------------
-
-def intary_to_trilist(ints, ilen):
-    trilist = []
-    for i in range(0, ilen):
-        trilist.append((ints[3 * i], ints[3 * i + 1], ints[3 * i + 2]))
-    return trilist
+        
+def formatArray(ary, leadtxt=None):
+    #print(type(ary))
+    if type(ary) is tuple or type(ary) is list:
+        ary = np.asarray(ary)
+    elif not isinstance(ary, np.ndarray):
+        return ''
+    s = np.array2string(ary, precision=3, separator=' ')
+    if (leadtxt != None):   
+        s = leadtxt + '\n' + s
+    return s
