@@ -27,3 +27,7 @@ The importer will then open a file selection dialog expecting a .txt file with a
 Thereafter the user is asked for one or more SOSI files. Multiple filed can be selected in the dialog.
 
 The appropriate files are then parsed, one by one. For every selected file a dialog will show all SOSI elements tags present. The user can choose to include/exclude any tags appropriate for the particular import. Default is inclusion of all element tags.
+
+## Example .sos file
+
+In order to verify that an installation is working properly, an example .sos file is included. This file is contains only rudimentory data, but is a perfectly valid SOSI file. 
