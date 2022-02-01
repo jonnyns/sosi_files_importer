@@ -1,19 +1,22 @@
-- [ ] SOSI file charsets - any more?
-- [ ] auto frame all after import
+- [ ] Check user codepage
+- [ ] SOSI file charsets: add more?
+- [ ] SOSI file charsets: complete for other than æ, ø, å, Æ, Ø, Å?
+- [ ] Blender auto frame all after import
 - [ ] Blender scale factor, use or delete
-- [ ] Metric vs Imperial from import data, correct handled?
+- [ ] Metric vs Imperial from import data, correctly handled?
 - [ ] Warning if clip-end < actual coords
+- [ ] Blender automated end-clip?
 - [ ] Warning if actual coords excessivly large
 - [ ] Layer name prefix in dialog removed or hidden
 - [ ] Sort button in dialog removed or hidden
 - [ ] Logging levels throughout (remove print())
 - [ ] Collection levels grouped together
 - [ ] Usage description
-- [ ] Test data files (without ref and with ref)
+- [x] Include simple test data .sos files to verify importer functionality
 - [ ] Error result split in error + cause
-- [ ] Check local codepage
-- [ ] "from ." also in Spyder
-- [ ] Describe why ref point
-- [ ] Calculate number of points for BUE
+- [x] Reorganize as Package for identical code in Blender and Spyder
+- [ ] Doc: Explain reference coordinate used to bring model close(r) to origin
+- [x] Add Settings file (Python) for specific settings
+- [x] Auto calculate number of points for BUE according to settings
 - [x] Add Python code for BUE rotation/translation
-- [ ] Add Python Options file for specific options
+- [ ] Doc: Available settings
