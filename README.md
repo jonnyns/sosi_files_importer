@@ -22,7 +22,7 @@ Run the importer from the *File/Import/Import SOSI Data* menu item.
 
 ![Demo import](/images/Importing_1.png)
 
-The importer will then open a file selection dialog expecting a Reference coordinate specification. This coordinate is provided to map the SOSI file 3D data to a region near the Blender coordinate origin. Remember that SOSI data can be located thousands of kilometers away from the origin, a situation Blender - as well as other 3D applications - is not meant to handle.
+The importer will then open a file selection dialog expecting a .txt file with a Reference coordinate specification. This coordinate is provided to map the SOSI file 3D data to a region near the Blender coordinate origin. Remember that SOSI data can be located thousands of kilometers away from the origin, a situation Blender - as well as other 3D applications - is not meant to handle.
 
 Thereafter the user is asked for one or more SOSI files. Multiple filed can be selected in the dialog.
 
