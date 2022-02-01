@@ -16,12 +16,14 @@ Currently, this addon has only been tested with Blender 3.0 and Windows10.
 
 ## Usage
 
-Activate the importer from the *File/Import/Import SOSI Data* menu item.
+Initially, the importer has to be enabled via the *Edit/preferences* dialog. It can be found as *Import-Export: SosiImporter*.
 
-The importer will then open a file selection dialog expecting a Reference coordinate specification. This coordinate is provided to map the SOSI file 3D data to a region near the Blender coordinate origin. Remember that SOSI data can be located thousands of kilometers away from the origin, a situation Blender - as well as other 3D applications - is not meant to handle.
+Run the importer from the *File/Import/Import SOSI Data* menu item.
 
 ![Demo import](/images/Importing_1.png)
 
+The importer will then open a file selection dialog expecting a Reference coordinate specification. This coordinate is provided to map the SOSI file 3D data to a region near the Blender coordinate origin. Remember that SOSI data can be located thousands of kilometers away from the origin, a situation Blender - as well as other 3D applications - is not meant to handle.
+
 Thereafter the user is asked for one or more SOSI files. Multiple filed can be selected in the dialog.
 
-The appropriate files are then parsed, and all SOSI element tags are subsequently displayed in another dialog. The user can choose to include/exclude any tags appropriate for the import. Default is inclusion of all element tags.
+The appropriate files are then parsed, one by one. For every selected file a dialog will show all SOSI elements tags present. The user can choose to include/exclude any tags appropriate for the particular import. Default is inclusion of all element tags.
