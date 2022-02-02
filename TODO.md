@@ -1,4 +1,5 @@
 - [ ] Check user codepage
+- [ ] Version handling, both PY and WinDLL
 - [ ] SOSI file charsets: add more?
 - [ ] SOSI file charsets: complete for other than æ, ø, å, Æ, Ø, Å?
 - [ ] Blender auto frame all after import
