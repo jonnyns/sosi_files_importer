@@ -31,7 +31,9 @@ The appropriate files are then parsed, one by one. For every selected file a dia
 ## Example .sos file
 
 In order to verify that an addon installation is working properly, an example .sos file is included together with an appropriate reference coordinate file. The .sos file contains only rudimentory data, but is a perfectly valid SOSI file.
-The files can be found in the test_data directory.
+
+The files can be found in the test_data directory:
+
 test_data
     |------ SomeBorders.sos
     |------ SomeBorders_ref.txt
