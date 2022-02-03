@@ -34,7 +34,7 @@ In order to verify that an addon installation is working properly, an example .s
 
 The files can be found in the test_data directory:
 
-test_data
-    |
-    |------ SomeBorders.sos
-    |------ SomeBorders_ref.txt
+test_data<br/>
+    |<br/>
+    |------ SomeBorders.sos<br/>
+    |------ SomeBorders_ref.txt<br/>
