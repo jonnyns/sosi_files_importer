@@ -18,16 +18,34 @@ Currently, this addon has only been tested with Blender 3.0 and Windows10.
 
 Initially, the importer has to be enabled via the *Edit/preferences* dialog. It can be found as *Import-Export: SosiImporter*.
 
+![Demo import 0](/images/Importing_0.png)
+
 Run the importer from the *File/Import/Import SOSI Data* menu item.
 
-![Demo import](/images/Importing_1.png)
+![Demo import 1](/images/Importing_1.png)
 
 The importer will then open a file selection dialog expecting a .txt file with a Reference coordinate specification. This coordinate is provided to map the SOSI file 3D data to a region near the Blender coordinate origin. Remember that SOSI data can be located thousands of kilometers away from the origin, a situation Blender - as well as other 3D applications - is not meant to handle.
 
-Thereafter the user is asked for one or more SOSI files. Multiple filed can be selected in the dialog.
+Thereafter the user is asked for one or more SOSI files. Multiple files can be selected in the dialog.
 
-The appropriate files are then parsed, one by one. For every selected file a dialog will show all SOSI elements tags present. The user can choose to include/exclude any tags appropriate for the particular import. Default is inclusion of all element tags.
+The appropriate SOSI files are then parsed, one by one. For every selected file a dialog will open and show all SOSI element tags present. The user can choose to include/exclude any tags appropriate for the particular import. Default is inclusion of all element tags.
+
+It is a good idea to open the Blender System Console before doing any imports, as the console will display importing details while processing. Any problems occurring while importing should be indicated in the console window.
 
 ## Example .sos file
 
-In order to verify that an installation is working properly, an example .sos file is included. This file is contains only rudimentory data, but is a perfectly valid SOSI file. 
+In order to verify that an addon installation is working properly, an example .sos file is included together with an appropriate reference coordinate file. The .sos file contains only rudimentory data, but is a perfectly valid SOSI file.
+
+The example files can be found in the test_data directory:
+
+```
+test_data
+|    SomeBorders.sos
+|    SomeBorders_ref.txt
+|  
+└─── 
+```
+
+The result in Blender after import should look like this:
+
+![TestFile import](/images/SomeBorders.png)

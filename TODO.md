@@ -1,16 +1,18 @@
+- [ ] Add SOSI element .TEXT?
 - [ ] Check user codepage
+- [ ] Version handling, both PY and WinDLL
 - [ ] SOSI file charsets: add more?
 - [ ] SOSI file charsets: complete for other than æ, ø, å, Æ, Ø, Å?
 - [ ] Blender auto frame all after import
 - [ ] Blender scale factor, use or delete
-- [ ] Metric vs Imperial from import data, correctly handled?
-- [ ] Warning if clip-end < actual coords
-- [ ] Blender automated end-clip?
-- [ ] Warning if actual coords excessivly large
-- [ ] Warnings for various things in console
+- [x] Metric vs Imperial from import data, correctly handled? Probably.
+- [x] Warning if clip-end < actual coords
+- [x] Blender automated end-clip? No, warning is enough.
+- [x] Warning if actual coords excessivly large
+- [x] Warnings for various things in console. OK.
 - [ ] Layer name prefix in dialog removed or hidden
 - [ ] Sort button in dialog removed or hidden
-- [ ] Logging levels throughout (remove print())
+- [x] Logging levels throughout (remove print())
 - [ ] Collection levels grouped together
 - [ ] Usage description
 - [x] Include simple test data .sos files to verify importer functionality
