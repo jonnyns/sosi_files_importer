@@ -18,11 +18,11 @@ Currently, this addon has only been tested with Blender 3.0 and Windows10.
 
 Initially, the importer has to be enabled via the *Edit/preferences* dialog. It can be found as *Import-Export: SosiImporter*.
 
-![Demo import](/images/Importing_0.png)
+![Demo import 0](/images/Importing_0.png)
 
 Run the importer from the *File/Import/Import SOSI Data* menu item.
 
-![Demo import](/images/Importing_1.png)
+![Demo import 1](/images/Importing_1.png)
 
 The importer will then open a file selection dialog expecting a .txt file with a Reference coordinate specification. This coordinate is provided to map the SOSI file 3D data to a region near the Blender coordinate origin. Remember that SOSI data can be located thousands of kilometers away from the origin, a situation Blender - as well as other 3D applications - is not meant to handle.
 
