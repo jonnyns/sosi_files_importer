@@ -45,3 +45,7 @@ test_data
 |  
 └─── 
 ```
+
+The result in Blender after import should look like this:
+
+![TestFile import](/images/SomeBorders.png)
