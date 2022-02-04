@@ -18,6 +18,8 @@ Currently, this addon has only been tested with Blender 3.0 and Windows10.
 
 Initially, the importer has to be enabled via the *Edit/preferences* dialog. It can be found as *Import-Export: SosiImporter*.
 
+![Demo import](/images/Importing_0.png)
+
 Run the importer from the *File/Import/Import SOSI Data* menu item.
 
 ![Demo import](/images/Importing_1.png)
@@ -34,7 +36,7 @@ It is a good idea to open the Blender System Console before doing any imports, a
 
 In order to verify that an addon installation is working properly, an example .sos file is included together with an appropriate reference coordinate file. The .sos file contains only rudimentory data, but is a perfectly valid SOSI file.
 
-The files can be found in the test_data directory:
+The example files can be found in the test_data directory:
 
 ```
 test_data
