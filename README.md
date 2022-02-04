@@ -26,7 +26,9 @@ The importer will then open a file selection dialog expecting a .txt file with a
 
 Thereafter the user is asked for one or more SOSI files. Multiple files can be selected in the dialog.
 
-The appropriate files are then parsed, one by one. For every selected file a dialog will show all SOSI elements tags present. The user can choose to include/exclude any tags appropriate for the particular import. Default is inclusion of all element tags.
+The appropriate SOSI files are then parsed, one by one. For every selected file a dialog will open and show all SOSI element tags present. The user can choose to include/exclude any tags appropriate for the particular import. Default is inclusion of all element tags.
+
+It is a good idea to open the Blender System Console before doing any imports, as the console will display importing details while processing. Any problems occurring while importing should be indicated in the console window.
 
 ## Example .sos file
 
@@ -34,7 +36,10 @@ In order to verify that an addon installation is working properly, an example .s
 
 The files can be found in the test_data directory:
 
-test_data<br/>
-    |<br/>
-    |------ SomeBorders.sos<br/>
-    |------ SomeBorders_ref.txt<br/>
+'''
+test_data
+|    SomeBorders.sos
+|    SomeBorders_ref.txt
+|  
+└─── 
+'''
