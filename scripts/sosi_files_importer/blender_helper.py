@@ -132,7 +132,7 @@ class Collection():
         # if it doesn't exist create it
         if coll is None:
             coll = bpy.data.collections.new(coll_name)
-            print('Main collection created')
+            #print('Main collection created')
             bpy.context.scene.collection.children.link(coll )
         return coll
 
@@ -142,7 +142,7 @@ class Collection():
         scoll = bpy.data.collections.get(scoll_name)
         if scoll is None:
             scoll = bpy.data.collections.new(scoll_name)
-            print('Sub collection created')
+            #print('Sub collection created')
             mcoll.children.link(scoll)
         return scoll
 
@@ -152,7 +152,7 @@ class Collection():
         scoll2 = bpy.data.collections.get(scoll2_name)
         if scoll2 is None:
             scoll2 = bpy.data.collections.new(scoll2_name)
-            print('Sub2 collection created')
+            #print('Sub2 collection created')
             scoll1.children.link(scoll2)
         return scoll2
 

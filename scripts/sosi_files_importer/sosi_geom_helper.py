@@ -231,7 +231,7 @@ def angles_circle_diff_2D(circle_pts):
 
 def angle_num_splits(angl):
     num_splits = (angl * soset.SOSI_ARC_SEGMENTS) / (2 * math.pi)
-    print(math.degrees(angl), num_splits)
+    #print(math.degrees(angl), num_splits)
     return num_splits
 
 # -----------------------------------------------------------------------------
@@ -269,7 +269,7 @@ def arc_pts_interpolate_2D(cirpts_hor, num_splits):
         if abs(angls_diff[0]) > abs(angls_diff[1]):
             angl_less = angls_diff[1] # lesser value
         num_splits = math.ceil(abs(angle_num_splits(angl_less)))
-        print(num_splits)
+        #print(num_splits)
     angls_interpolated = angles_interpolate(angls, angls_diff, num_splits)
     #print(rads_2_degrees(angls_interpolated))
 

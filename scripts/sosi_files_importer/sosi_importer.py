@@ -44,6 +44,9 @@ RES_SOSI_LOOP_UNCLOSED      = 0x0100
 
 # Determine if the code is running from within Blender
 in_blender = True
+# Determine where to find the DLL
+use_dll_development = False #  Must be False if installed from GitHub!
+
 try:
     import bpy
     in_blender = os.path.basename(bpy.app.binary_path or '').lower().startswith('blender')
@@ -136,6 +139,8 @@ def my_cb_func(id, objrefnum, sosires, pobjname, ndims, ncoords, pcoord_ary, pfi
         #bpy.context.collection.objects.link(ob)
         coll.objects.link(ob)
         print ('FLATE {}: Res= 0x{:x} NoOfCoords= {}'.format(objrefnum, sosires, ncoords))
+        if (sosires & RES_SOSI_DIMENSION_MISMATCH):
+            print('  WARNING: Dimension mismatch in FLATE elements, drawing might be strange.')
         bpy.ops.object.select_all(action='DESELECT')
         bpy.context.view_layer.objects.active = ob
         ob.select_set(True)
@@ -146,10 +151,10 @@ def my_cb_func(id, objrefnum, sosires, pobjname, ndims, ncoords, pcoord_ary, pfi
         #bpy.ops.mesh.quads_convert_to_tris(quad_method='BEAUTY', ngon_method='BEAUTY') # Triangulate
         bpy.ops.object.mode_set(mode = 'OBJECT')
     elif (sodhlp.SosiObjId(id) == sodhlp.SosiObjId.BUEP):
-        print("A", coord_list)
+        #print("A", coord_list)
         num_segs = 8
         arc_seg_pts = sogeohlp.arc_pts_segments_3D(coord_list, num_segs)
-        print("B", arc_seg_pts)
+        #print("B", arc_seg_pts)
         edg_list = sodhlp.points_to_edglist(arc_seg_pts)
         #print("B", edg_list)
         ob = bldhlp.Mesh.point_cloud(objname, arc_seg_pts, edg_list)
@@ -162,17 +167,18 @@ def my_cb_func(id, objrefnum, sosires, pobjname, ndims, ncoords, pcoord_ary, pfi
 # -----------------------------------------------------------------------------
 
 def do_imports():
-    logger = sologhlp.get_logger()	
-    #rel_path = 'bin\\x64\\JoNoS_Blender_SosiLib.dll'
-    #rel_path = 'x64\\Debug\\JoNoS_Blender_SosiLib.dll'
-    #dll_path = get_full_path(rel_path)
-    dll_path = 'F:\\MyProjects\\Projects\\TGT\\PY\\JoNoS_Blender_SosiLib\\x64\\Debug\\JoNoS_Blender_SosiLib.dll'
+    logger = sologhlp.get_logger()
+    if use_dll_development == True:
+        dll_path = \
+            'F:\\MyProjects\\Projects\\TGT\\PY\\JoNoS_Blender_SosiLib\\' \
+            'x64\\Debug\\JoNoS_Blender_SosiLib.dll' 
+    else:
+        rel_path = 'bin\\x64\\JoNoS_Blender_SosiLib.dll'
+        dll_path = get_full_path(rel_path)
     
-    #print(dll_path)
     my_dll = ctypes.WinDLL(dll_path)
     
     #Prototype callback
-    #callback_type = ctypes.CFUNCTYPE(c_int, c_int, c_int, c_char_p, c_int, c_int, #ctypes.POINTER(c_double), c_int, ctypes.POINTER(c_int))
     callback_type = ctypes.CFUNCTYPE(c_int, c_int, c_int, c_int, c_char_p, c_int, c_int, ctypes.POINTER(c_double), c_char_p)
     my_callback = callback_type(my_cb_func)  # Use a variable to avoid garbage collection
     
@@ -185,7 +191,7 @@ def do_imports():
     my_dll.process_SosiFiles.restype = c_int
     
     bldscale = 1.0  # bldhlp.LocalUnits.scene_unit_factor() # STRANGE??? Blender takes numbers as m always???
-    print("Blender scale factor:", bldscale)
+    #print("Blender scale factor:", bldscale)
     #bldhlp.setMyEnvironment()   # TEMPORARY to set my local environment
     
     peasting = (ctypes.c_double)()
@@ -198,7 +204,7 @@ def do_imports():
     unit_system = bldhlp.UnitSettings.scene_unit_system_get()
     unit_length = bldhlp.UnitSettings.scene_unit_length_get()
     unit_scale = bldhlp.UnitSettings.scene_unit_scale_get()
-    print(unit_system, unit_length, unit_scale)
+    #print(unit_system, unit_length, unit_scale)
  
     nfiles = my_dll.get_SosiInputObjects(peasting, pnorthing, punity, bldscale, clip_end, unit_system, unit_length, unit_scale)
     # print(peasting, pnorthing, punity, nfiles)
