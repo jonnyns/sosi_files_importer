@@ -13,7 +13,7 @@
 - [ ] Layer name prefix in dialog removed or hidden
 - [ ] Sort button in dialog removed or hidden
 - [x] Logging levels throughout (remove print())
-- [ ] Collection levels grouped together
+- [ ] Parent collections together so they move as one group
 - [x] Usage description
 - [x] Include simple test data .sos files to verify importer functionality
 - [x] Error result split in error + cause
