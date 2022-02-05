@@ -326,7 +326,6 @@ def arc_pts_segments_3D(arc_pts, num_splits):
     logging.debug(' Circle points around origo:\n%s', sologhlp.formatArray(cir_pts_hor_origo))
     
     # Interpolate into arc segment points
-    #num_splits = 8
     arc_pts_horz_origo = arc_pts_interpolate_2D(cir_pts_hor_origo, num_splits)
     logging.debug(' Circle points around origo:\n%s', sologhlp.formatArray(arc_pts_horz_origo))
     

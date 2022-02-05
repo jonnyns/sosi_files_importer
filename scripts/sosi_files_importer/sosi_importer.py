@@ -30,6 +30,7 @@ import sys
 import numpy as np
 import ctypes
 from ctypes import wintypes
+from . import sosi_settings as soset
 from . import sosi_log_helper as sologhlp
 from . import sosi_geom_helper as sogeohlp
 
@@ -42,10 +43,9 @@ RES_SOSI_LOOP_UNCLOSED      = 0x0100
 #C = bpy.context
 #D = bpy.data
 
+
 # Determine if the code is running from within Blender
 in_blender = True
-# Determine where to find the DLL
-use_dll_development = False #  Must be False if installed from GitHub!
 
 try:
     import bpy
@@ -151,12 +151,9 @@ def my_cb_func(id, objrefnum, sosires, pobjname, ndims, ncoords, pcoord_ary, pfi
         #bpy.ops.mesh.quads_convert_to_tris(quad_method='BEAUTY', ngon_method='BEAUTY') # Triangulate
         bpy.ops.object.mode_set(mode = 'OBJECT')
     elif (sodhlp.SosiObjId(id) == sodhlp.SosiObjId.BUEP):
-        #print("A", coord_list)
         num_segs = 8
         arc_seg_pts = sogeohlp.arc_pts_segments_3D(coord_list, num_segs)
-        #print("B", arc_seg_pts)
         edg_list = sodhlp.points_to_edglist(arc_seg_pts)
-        #print("B", edg_list)
         ob = bldhlp.Mesh.point_cloud(objname, arc_seg_pts, edg_list)
         #bpy.context.collection.objects.link(ob)
         coll.objects.link(ob)
@@ -168,12 +165,11 @@ def my_cb_func(id, objrefnum, sosires, pobjname, ndims, ncoords, pcoord_ary, pfi
 
 def do_imports():
     logger = sologhlp.get_logger()
-    if use_dll_development == True:
-        dll_path = \
-            'F:\\MyProjects\\Projects\\TGT\\PY\\JoNoS_Blender_SosiLib\\' \
-            'x64\\Debug\\JoNoS_Blender_SosiLib.dll' 
+    
+    if soset.USE_DEBUG_PATH == True:
+        dll_path = soset.DEBUG_DLL_PATH
     else:
-        rel_path = 'bin\\x64\\JoNoS_Blender_SosiLib.dll'
+        rel_path = soset.REL_DLL_PATH
         dll_path = get_full_path(rel_path)
     
     my_dll = ctypes.WinDLL(dll_path)
