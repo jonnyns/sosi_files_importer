@@ -1,5 +1,5 @@
 # sosi_files_importer for Blender
-Importer for SOSI files (containing 3D model data) used for geographical information in Norway.
+Importer for SOSI files (containing 3D model data) used for geographical information in Norway. This format was first standardized around 1990 by *Statens Kartverk*, and is still in active use in Norway.
 
 This is an addon for Blender to allow imports of SOSI files (with extension .sos). This addon is intended to handle the data normally contained in so-called 
 "digital maps" available from Norwegian municipal og governmental services.
