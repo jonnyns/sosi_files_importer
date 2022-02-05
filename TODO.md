@@ -1,6 +1,6 @@
-- [ ] Add SOSI element .TEXT?
+- [ ] Add also SOSI element .TEXT(?)
 - [ ] Check user codepage
-- [ ] Version handling, both PY and WinDLL
+- [x] Version handling, both PY and WinDLL
 - [ ] SOSI file charsets: add more?
 - [ ] SOSI file charsets: complete for other than æ, ø, å, Æ, Ø, Å?
 - [ ] Blender auto frame all after import
@@ -14,9 +14,9 @@
 - [ ] Sort button in dialog removed or hidden
 - [x] Logging levels throughout (remove print())
 - [ ] Collection levels grouped together
-- [ ] Usage description
+- [x] Usage description
 - [x] Include simple test data .sos files to verify importer functionality
-- [ ] Error result split in error + cause
+- [x] Error result split in error + cause
 - [x] Reorganize as Package for identical code in Blender and Spyder
 - [ ] Doc: Explain reference coordinate used to bring model close(r) to origin
 - [x] Add Settings file (Python) for specific settings
