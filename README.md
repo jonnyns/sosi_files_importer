@@ -52,7 +52,11 @@ The result in Blender after import should look like this:
 
 ## File Format
 
-Documentation for the SOSI format can be found via the link 
+The documentation for the SOSI format could certainly be better, but some documentation can be found via the link https://www.kartverket.no/geodataarbeid/standardisering/sosi-standarder2.
 
-https://www.kartverket.no/geodataarbeid/standardisering/sosi-standarder2
+The format for the Reference file is pretty straight-forward. It simply takes two lines, one starting with E (for Easting) and one starting with N (for Northing). The float values after the letters are the corresponding coordinates values. The SOSI file data will be translated such that the Blender model origin will correspond to these coordinates.
 
+```
+E579843.71
+N6635218.06
+```
