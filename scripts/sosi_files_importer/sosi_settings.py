@@ -24,8 +24,22 @@ This file is part of SosiImporter, an addon to import SOSI files containing
 3D model data into Blender.
 """
 
+import logging
 
-USE_DEBUG_PATH = False #  Must be False if installed from GitHub!
+# -----------------------------------------------------------------------------
+
+# Debug levels:
+# CRITICAL  50
+# ERROR 	40
+# WARNING 	30
+# INFO      20
+# DEBUG 	10
+# NOTSET 	0
+
+#ACT_LOG_LEVEL = logging.DEBUG
+ACT_LOG_LEVEL = logging.INFO
+
+USE_DEBUG_DLL_PATH = False #  Must be False if installed from GitHub!
 
 # DLL path when file is installed by Blender
 REL_DLL_PATH = 'sosi_files_importer\\bin\\x64\\JoNoS_Blender_SosiLib.dll'

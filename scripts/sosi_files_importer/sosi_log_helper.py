@@ -37,9 +37,9 @@ import logging
 # DEBUG 	10
 # NOTSET 	0
 
-def get_logger():
+def get_logger(level):
     logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(level)
     logger.info('Logger initialized')
     return logger
 

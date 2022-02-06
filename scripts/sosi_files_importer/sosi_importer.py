@@ -164,9 +164,9 @@ def my_cb_func(id, objrefnum, sosires, pobjname, ndims, ncoords, pcoord_ary, pfi
 # -----------------------------------------------------------------------------
 
 def do_imports():
-    logger = sologhlp.get_logger()
+    logger = sologhlp.get_logger(soset.ACT_LOG_LEVEL)   
     
-    if soset.USE_DEBUG_PATH == True:
+    if soset.USE_DEBUG_DLL_PATH == True:
         dll_path = soset.DEBUG_DLL_PATH
     else:
         rel_path = soset.REL_DLL_PATH
