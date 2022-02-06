@@ -8,11 +8,13 @@ The add-on was originally written in C++ for Sketchup under 64-bit Windows10. Fo
 
 The *scripts/sosi_files_importer/* directory contains the sources for the Python code necessary to interface with the WinDLL. The DLL itself is placed in the sub directory *bin\x64*.
 
-It is not recommended to install the addon using the sources directly. Instead, please use the packaged contents in the *release page*. The packaged zip-file can be directly installed from the *Install...* button in the *Blender Preferences* dialog.
-
 Currently, this addon has only been tested with Blender 3.0 and Windows10.
 
 ![Example import](/images/ImportExample_0.png)
+
+## Installation
+
+While certainly possible, it is not recommended to install the addon using the sources directly. Instead, please use the packaged contents in the *Release page*. The packaged zip-file can be directly installed from the *Install...* button in the *Blender Preferences* dialog.
 
 ## Usage
 
