@@ -62,3 +62,5 @@ The format for the Reference file is pretty straight-forward. It simply takes tw
 E579843.71
 N6635218.06
 ```
+
+SOSI file ordered from public sources will come with UTM coordinates, which uses the notation Easting and Northing. It is beyond the scope of this document to further dive into this matter. https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system gives a good insight into the UTM system.
