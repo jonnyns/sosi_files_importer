@@ -5,5 +5,6 @@
 - [ ] Blender auto frame all after import
 - [ ] Blender scale factor
 - [ ] Parent collections together
+- [ ] Add a few demo/test SOSI files
 - [ ] Documentation: Improve
 - [ ] Documentation: Settings
