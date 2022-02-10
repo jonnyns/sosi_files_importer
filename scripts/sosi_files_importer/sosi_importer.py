@@ -30,6 +30,7 @@ import sys
 import numpy as np
 import ctypes
 from ctypes import wintypes
+import logging
 from . import sosi_settings as soset
 from . import sosi_log_helper as sologhlp
 from . import sosi_geom_helper as sogeohlp
@@ -43,6 +44,8 @@ RES_SOSI_LOOP_UNCLOSED      = 0x0100
 #C = bpy.context
 #D = bpy.data
 
+# Parent object for all SOSI elements
+top_parent = None
 
 # Determine if the code is running from within Blender
 in_blender = True
@@ -107,6 +110,23 @@ def free_library(handle):
 
 # Function will be called per sosi object and return ptr to object name, ptr to coordinate array 
 def my_cb_func(id, objrefnum, sosires, pobjname, ndims, ncoords, pcoord_ary, pfilename):
+	
+    #global has_parent
+    global top_parent
+    #print('PAR2 before:', top_parent)
+    
+    #if has_parent == False:
+    if top_parent == None:
+        #print('--->done')
+        top_parent = bpy.data.objects.new("SOSI_Parent", None)
+        top_parent.empty_display_size = 1
+        #top_parent.empty_display_type = 'PLAIN_AXES'
+        top_parent.empty_display_type = 'SPHERE'
+        bpy.context.scene.collection.objects.link(top_parent)
+        #has_parent = True
+        #print('PAR3 after:', top_parent)
+        logging.debug(' SOSI_Parent:', top_parent)
+	
     objname = pobjname.decode('utf-8')  # Interpret the byte array as utf-8
     #print(objname)
     # NUMPY copy
@@ -120,25 +140,49 @@ def my_cb_func(id, objrefnum, sosires, pobjname, ndims, ncoords, pcoord_ary, pfi
     
     if (sodhlp.SosiObjId(id) == sodhlp.SosiObjId.PUNKT):
         ob = bldhlp.Mesh.point_cloud(objname, coord_list)
-        #bpy.context.collection.objects.link(ob)
-        coll.objects.link(ob)
-        print ('PUNKT {}: Res= 0x{:x} NoOfCoords= {}'.format(objrefnum, sosires, ncoords))
+        
+        if bldhlp.get_mesh_obj_named(objname) != None:
+            ob = bldhlp.mesh_obj_join_existing(objname, ob)
+            #print('  Joined', ob.data)
+            logging.debug('  Joined', ob.data)
+        else:
+            ob.parent = top_parent
+            #bpy.context.collection.objects.link(ob)
+            coll.objects.link(ob)
+        #print('PUNKT {}: Res= 0x{:x} NoOfCoords= {}'.format(objrefnum, sosires, ncoords))
+        logging.info('PUNKT {}: Res= 0x{:x} NoOfCoords= {}'.format(objrefnum, sosires, ncoords))
     elif (sodhlp.SosiObjId(id) == sodhlp.SosiObjId.KURVE):
         #print("A", coord_list)
         edg_list = sodhlp.points_to_edglist(coord_list)
         #print("B", edg_list)
         ob = bldhlp.Mesh.point_cloud(objname, coord_list, edg_list)
-        #bpy.context.collection.objects.link(ob)
-        coll.objects.link(ob)
-        print ('KURVE {}: Res= 0x{:x} NoOfCoords= {}'.format(objrefnum, sosires, ncoords))
+        
+        if bldhlp.get_mesh_obj_named(objname) != None:
+            ob = bldhlp.mesh_obj_join_existing(objname, ob)
+            #print('  Joined', ob.data)
+            logging.debug('  Joined', ob.data)
+        else:
+            ob.parent = top_parent
+            #bpy.context.collection.objects.link(ob)
+            coll.objects.link(ob)
+        #print('KURVE {}: Res= 0x{:x} NoOfCoords= {}'.format(objrefnum, sosires, ncoords))
+        logging.info('KURVE {}: Res= 0x{:x} NoOfCoords= {}'.format(objrefnum, sosires, ncoords))
     elif (sodhlp.SosiObjId(id) == sodhlp.SosiObjId.FLATE):
         #print("A", coord_list)
         edg_list = sodhlp.points_to_edglist(coord_list)
         ob = bldhlp.Mesh.point_cloud(objname, coord_list, edg_list)
-        #ob = bldhlp.Mesh.point_cloud(filename, coord_list, edg_list)
-        #bpy.context.collection.objects.link(ob)
-        coll.objects.link(ob)
-        print ('FLATE {}: Res= 0x{:x} NoOfCoords= {}'.format(objrefnum, sosires, ncoords))
+        
+        if bldhlp.get_mesh_obj_named(objname) != None:
+            ob = bldhlp.mesh_obj_join_existing(objname, ob)
+            #print('  Joined', ob.data)
+            logging.debug('  Joined', ob.data)
+        else:
+            ob.parent = top_parent
+            #ob = bldhlp.Mesh.point_cloud(filename, coord_list, edg_list)
+            #bpy.context.collection.objects.link(ob)
+            coll.objects.link(ob)
+        #print ('FLATE {}: Res= 0x{:x} NoOfCoords= {}'.format(objrefnum, sosires, ncoords))
+        logging.info('FLATE {}: Res= 0x{:x} NoOfCoords= {}'.format(objrefnum, sosires, ncoords))
         if (sosires & RES_SOSI_DIMENSION_MISMATCH):
             print('  WARNING: Dimension mismatch in FLATE elements, drawing might be strange.')
         bpy.ops.object.select_all(action='DESELECT')
@@ -155,16 +199,26 @@ def my_cb_func(id, objrefnum, sosires, pobjname, ndims, ncoords, pcoord_ary, pfi
         arc_seg_pts = sogeohlp.arc_pts_segments_3D(coord_list, num_segs)
         edg_list = sodhlp.points_to_edglist(arc_seg_pts)
         ob = bldhlp.Mesh.point_cloud(objname, arc_seg_pts, edg_list)
-        #bpy.context.collection.objects.link(ob)
-        coll.objects.link(ob)
-        print ('BUEP {}: Res= 0x{:x} NoOfCoords= {}'.format(objrefnum, sosires, ncoords))
+        
+        if bldhlp.get_mesh_obj_named(objname) != None:
+            ob = bldhlp.mesh_obj_join_existing(objname, ob)
+            #print('  Joined', ob.data)
+            logging.debug('  Joined', ob.data)
+        else:
+            ob.parent = top_parent
+            #bpy.context.collection.objects.link(ob)
+            coll.objects.link(ob)
+        #print('BUEP {}: Res= 0x{:x} NoOfCoords= {}'.format(objrefnum, sosires, ncoords))
+        logging.info('BUEP {}: Res= 0x{:x} NoOfCoords= {}'.format(objrefnum, sosires, ncoords))
         
     return 0
 
 # -----------------------------------------------------------------------------
 
 def do_imports():
-    logger = sologhlp.get_logger(soset.ACT_LOG_LEVEL)   
+    logger = sologhlp.get_logger(soset.ACT_LOG_LEVEL)
+    global top_parent
+    top_parent = None
     
     if soset.USE_DEBUG_DLL_PATH == True:
         dll_path = soset.DEBUG_DLL_PATH

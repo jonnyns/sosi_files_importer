@@ -25,6 +25,7 @@ This file is part of SosiImporter, an addon to import SOSI files containing
 """
 
 import bpy
+import bmesh
 
 # -----------------------------------------------------------------------------
 
@@ -206,3 +207,54 @@ def setMyEnvironment():
     bpy.data.worlds["World"].node_tree.nodes["Background"].inputs[0].default_value[2] = 1
     SceneSettings.set_shading()
     
+# -----------------------------------------------------------------------------
+    
+def get_mesh_obj_named(obname):
+    for o in bpy.context.scene.objects:
+        if o.type == 'MESH' and o.name == obname:
+            return o
+    return None
+
+# -----------------------------------------------------------------------------
+
+    
+# Join the two meshes together and name the resulting mesh name
+def meshes_join(name, me1, me2):
+    bm = bmesh.new()
+    bm.from_mesh(me1)
+    #print(bm)
+    bm.from_mesh(me2)
+    #print(bm)
+    me = bpy.data.meshes.new(name)
+    bm.to_mesh(me)
+    bm.free()
+    return me
+
+# -----------------------------------------------------------------------------    
+
+# Join the mesh in the object ob_new to the existing mesh object eith name obname
+def mesh_obj_join_existing(obname, ob_new):
+    
+    ob_orig = None
+    for o in bpy.context.scene.objects:
+        if o.type == 'MESH':
+            if o.name == obname:
+                ob_orig = o
+                
+    if ob_orig != None:
+        #print('Found orig', ob_orig)
+        
+        me_orig = ob_orig.data
+        me_joined = meshes_join(obname, me_orig, ob_new.data)
+        
+        ob_orig.data = me_joined
+        bpy.data.meshes.remove(me_orig, do_unlink=True)
+        return ob_orig
+    else:
+        return None
+    #    me_new = ob_new.data
+    #    me_new.name = obname
+    #    ob_new.name = obname
+    #    return ob_new   
+    
+# -----------------------------------------------------------------------------
