@@ -6,7 +6,7 @@ This is an addon for Blender to allow imports of SOSI files (with extension .sos
 
 The add-on was originally written in C++ for Sketchup under 64-bit Windows10. For Blender the appropriate C++ code is compiled into a DLL and called from Python. Thus, this addon is only usable within the Windows environment.
 
-The *scripts/sosi_files_importer/* directory contains the sources for the Python code necessary to interface with the WinDLL. The DLL itself is placed in the sub directory *bin\x64*.
+The *scripts/sosi_files_importer/* directory contains the sources for the Python code necessary to interface with the WinDLL. The DLL itself is placed in the sub directory *bin/x64/*.
 
 Currently, this addon has only been tested with Blender 3.0 and Windows10.
 

@@ -1,25 +1,10 @@
-- [ ] Add also SOSI element .TEXT(?)
-- [ ] Check user codepage
-- [x] Version handling, both PY and WinDLL
-- [ ] SOSI file charsets: add more?
-- [ ] SOSI file charsets: complete for other than æ, ø, å, Æ, Ø, Å?
+- [ ] Clean up the code
+- [ ] Add SOSI element .TEXT
+- [ ] Check vs user codepage
+- [ ] SOSI file charsets: add and complete for other than æ, ø, å, Æ, Ø, Å
 - [ ] Blender auto frame all after import
-- [ ] Blender scale factor, use or delete
-- [x] Metric vs Imperial from import data, correctly handled? Probably.
-- [x] Warning if clip-end < actual coords
-- [x] Blender automated end-clip? No, warning is enough.
-- [x] Warning if actual coords excessivly large
-- [x] Warnings for various things in console. OK.
-- [ ] Layer name prefix in dialog removed or hidden
-- [ ] Sort button in dialog removed or hidden
-- [x] Logging levels throughout (remove print())
-- [ ] Parent collections together so they move as one group
-- [x] Usage description
-- [x] Include simple test data .sos files to verify importer functionality
-- [x] Error result split in error + cause
-- [x] Reorganize as Package for identical code in Blender and Spyder
-- [ ] Doc: Explain reference coordinate used to bring model close(r) to origin
-- [x] Add Settings file (Python) for specific settings
-- [x] Auto calculate number of points for BUE according to settings
-- [x] Add Python code for BUE rotation/translation
-- [ ] Doc: Available settings
+- [ ] Blender scale factor
+- [ ] Parent collections together
+- [ ] Add a few demo/test SOSI files
+- [ ] Documentation: Improve
+- [ ] Documentation: Settings
