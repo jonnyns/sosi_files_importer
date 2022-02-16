@@ -27,6 +27,57 @@ This file is part of SosiImporter, an addon to import SOSI files containing
 import numpy as np
 import logging
 
+def get_logger1(logger_level):
+               
+    # Create a custom logger
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
+    print('HEYHEY')
+
+    # Streaming Handler
+    c_handler = logging.StreamHandler()
+    c_handler.setLevel(logging.INFO)
+    c_format = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
+    c_handler.setFormatter(c_format)
+    logger.addHandler(c_handler)
+
+    # File Handler
+    #f_handler = logging.FileHandler('file.log')
+    #f_handler.setLevel(logging.DEBUG)
+    #f_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    #f_handler.setFormatter(f_format)
+    #logger.addHandler(f_handler)
+    
+    return logger
+
+
+def get_logger2(logger_level, create_file=False):
+
+    # create logger for prd_ci
+    log = logging.getLogger()
+    log.setLevel(logging.DEBUG)
+    print('HEY')
+
+    # create formatter and add it to the handlers
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+    if create_file:
+        # create file handler for logger.
+        fh = logging.FileHandler('SPOT.log')
+        fh.setLevel(level=logging.DEBUG)
+        fh.setFormatter(formatter)
+    # reate console handler for logger.
+    ch = logging.StreamHandler()
+    ch.setLevel(level=logging.DEBUG)
+    ch.setFormatter(formatter)
+
+    # add handlers to logger.
+    if create_file:
+        log.addHandler(fh)
+
+    log.addHandler(ch)
+    return log 
+
 # -----------------------------------------------------------------------------
 
 # Debug levels:
@@ -37,10 +88,20 @@ import logging
 # DEBUG 	10
 # NOTSET 	0
 
-def get_logger(level):
+def get_logger(log_level):
+    #print('--> Log_level', log_level)
     logger = logging.getLogger()
-    logger.setLevel(level)
-    logger.info('Logger initialized')
+    
+    logger.handlers = []
+    handler = logging.StreamHandler()
+    handler.setLevel(log_level)
+    formatter = logging.Formatter("%(levelname)s: %(message)s")
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    
+    logger.setLevel(log_level)
+    
+    logging.info('Logger initialized with level {}'.format(log_level))
     return logger
 
 # -----------------------------------------------------------------------------

@@ -60,6 +60,8 @@ except ModuleNotFoundError:
 if (in_blender == True):
     from . import sosi_datahelper as sodhlp    
     from . import blender_helper as bldhlp
+    from bpy.types import AddonPreferences
+    from bpy.props import EnumProperty
 else:
     import sosi_datahelper as sodhlp    
     import blender_helper as bldhlp
@@ -76,6 +78,63 @@ c_int32 = ctypes.c_int32
 c_double = ctypes.c_double
 c_void_p = ctypes.c_void_p
 c_char_p = ctypes.c_char_p
+
+# -----------------------------------------------------------------------------
+
+class SosiImporterPreferences(AddonPreferences):
+    
+    bl_idname = __package__
+    
+    def update_log_level(self, context):
+        logging.info("Setting log level to %s", self.log_level)
+        #logging.setLevel(self.log_level)
+        #print('-->', self.log_level)
+        return
+    
+    # Debug levels:
+    # CRITICAL  50
+    # ERROR 	40
+    # WARNING 	30
+    # INFO      20
+    # DEBUG 	10
+    # NOTSET 	0
+    
+    log_levels = [
+        ('DEBUG', "Debug", "Debug output", 0),
+        ('INFO', "Information", "Informational output", 1),
+        ('WARNING', "Warnings", "Show only warnings and errors", 2),
+        ('ERROR', "Errors", "Show errors only", 3)
+        ]
+
+    log_level: EnumProperty(
+        name = "Logging level",
+        description = "Minimum events severity level to output. All more severe messages will be logged as well.",
+        items = log_levels,
+        update = update_log_level,  # update method when changing
+        default = 'INFO')
+    
+#    def update_test_xenums(self, context):
+#        print("Hey")
+#        return
+#    
+#    test_xenums = [
+#        ('ONE', "One", "eqwe"),
+#        ('TWO', "Two", "sdaasd"),
+#        ('THREE', "Three", "dsfasdf")
+#        ]
+#    
+#    test_xenum: EnumProperty(
+#        name = "Some name",
+#        description = "Some description",
+#        items = test_xenums,
+#        update = update_test_xenums,
+#        default = 'THREE' 
+#        )
+   
+    def draw(self, context):
+        layout = self.layout
+        layout.prop(self, "log_level")
+#        layout.prop(self, "test_xenum")
 
 # -----------------------------------------------------------------------------
 
@@ -216,7 +275,13 @@ def my_cb_func(id, objrefnum, sosires, pobjname, ndims, ncoords, pcoord_ary, pfi
 # -----------------------------------------------------------------------------
 
 def do_imports():
-    logger = sologhlp.get_logger(soset.ACT_LOG_LEVEL)
+    
+    preferences = bpy.context.preferences
+    addon_prefs = preferences.addons[__package__].preferences
+    
+    #logger = sologhlp.get_logger(soset.ACT_LOG_LEVEL)
+    logger = sologhlp.get_logger(addon_prefs.log_level)
+    
     global top_parent
     top_parent = None
     

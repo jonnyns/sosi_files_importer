@@ -28,7 +28,7 @@ This file is part of SosiImporter, an addon to import SOSI files containing
 bl_info = {
     "name": "SosiImporter",
     "author": "Jonny Normann Skålvik",
-    "version": (1, 1, 0),
+    "version": (1, 2, 0),
     "blender": (2, 93, 0),
     "location": "File > Import > SosiImporter",
     "description": "Import objects from SOSI files (.sos)",
@@ -47,10 +47,6 @@ try:
 except ModuleNotFoundError:
     env_blender = False   
 print('INFO: Blender environment:', env_blender)
-
-#print(__file__)
-#print(os.path.abspath(__file__))
-#print(os.path.dirname(os.path.abspath(__file__)))
 
 # To support reload properly, try to access a package var, 
 # if it's there, reload everything
@@ -78,7 +74,7 @@ class ImportSOSIData(bpy.types.Operator):
     def execute(self, context):
         main(context)
         return {'FINISHED'}
-
+        
 # -----------------------------------------------------------------------------
     
 def menu_func_import(self, context):
@@ -88,11 +84,13 @@ def menu_func_import(self, context):
 
 def register():
     bpy.utils.register_class(ImportSOSIData)
+    bpy.utils.register_class(sosimp.SosiImporterPreferences)
     bpy.types.TOPBAR_MT_file_import.append(menu_func_import)
 
 # -----------------------------------------------------------------------------
 
 def unregister():
+    bpy.utils.unregister_class(sosimp.SosiPreferences)
     bpy.utils.unregister_class(ImportSOSIData)
     bpy.types.TOPBAR_MT_file_import.remove(menu_func_import)
 
