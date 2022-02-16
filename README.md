@@ -39,7 +39,7 @@ Please note that the importer uses standard Python logging mechanisms. One of th
 - ERROR
 
 Default logging level after installation is INFO. The logging level can be changed by expanding the SosiImporter specific information from the *Blender Preferences* dialog.
-Thus, it is a good idea to open the Blender System Console before doing any imports, as the console will display importing details while processing. Any problems occurring while importing should be indicated in the console window as the importer.
+Thus, it is a good idea to open the Blender System Console before doing any imports, as the console will display importing details while processing. Any problems occurring while importing should be indicated in the console window.
 
 ## Example .sos file
 
