@@ -4,7 +4,7 @@
 - [ ] SOSI file charsets: add and complete for other than æ, ø, å, Æ, Ø, Å
 - [ ] Blender auto frame all after import
 - [ ] Blender scale factor
-- [ ] Parent collections together
+- [ ] Make collections parented
 - [ ] Add a few demo/test SOSI files
 - [ ] Documentation: Improve
 - [ ] Documentation: Settings
