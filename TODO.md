@@ -7,5 +7,6 @@
 - [x] Make collections parented
 - [ ] Surfaces with hole(s) not handled yet, holes are just skipped for now
 - [ ] Add a few demo/test SOSI files
+- [ ] Filter bad date, allow option(s) correct obvious bad data
 - [ ] Documentation: Improve
 - [ ] Documentation: Settings
