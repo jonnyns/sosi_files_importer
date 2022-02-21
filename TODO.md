@@ -4,7 +4,8 @@
 - [ ] SOSI file charsets: add and complete for other than æ, ø, å, Æ, Ø, Å
 - [ ] Blender auto frame all after import
 - [ ] Blender scale factor
-- [ ] Make collections parented
+- [x] Make collections parented
+- [ ] Surfaces with hole(s) not handled yet, holes are just skipped for now
 - [ ] Add a few demo/test SOSI files
 - [ ] Documentation: Improve
 - [ ] Documentation: Settings
