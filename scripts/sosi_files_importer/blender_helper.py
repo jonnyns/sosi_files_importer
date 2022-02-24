@@ -156,7 +156,7 @@ class Collection():
             #print('Sub2 collection created')
             scoll1.children.link(scoll2)
         return scoll2
-
+    
 # -----------------------------------------------------------------------------
     
 class SceneSettings():
@@ -198,6 +198,19 @@ class SceneSettings():
         space_data = v3d_area.spaces.active
         space_data.shading.type = 'RENDERED'
         
+# -----------------------------------------------------------------------------
+
+def get_or_create_SOSI_parent_object(sosi_parent_name):
+    top_parent = bpy.data.objects.get(sosi_parent_name)
+    if top_parent == None:
+        top_parent = bpy.data.objects.new(sosi_parent_name, None)
+        top_parent.empty_display_size = 1
+        #top_parent.empty_display_type = 'PLAIN_AXES'
+        top_parent.empty_display_type = 'SPHERE'
+        bpy.context.scene.collection.objects.link(top_parent)
+#           logging.debug(' SOSI_Parent:', top_parent)
+    return top_parent
+    
 # -----------------------------------------------------------------------------
         
 def setMyEnvironment():
@@ -257,4 +270,19 @@ def mesh_obj_join_existing(obname, ob_new):
     #    ob_new.name = obname
     #    return ob_new   
     
+# -----------------------------------------------------------------------------
+
+def lock_obj_to_parent(obj):
+    if obj.parent != None:
+        #print(obj.name)
+        obj.lock_location[0] = True
+        obj.lock_location[1] = True
+        obj.lock_location[2] = True
+        obj.lock_rotation[0] = True
+        obj.lock_rotation[1] = True
+        obj.lock_rotation[2] = True
+        obj.lock_scale[0] = True
+        obj.lock_scale[1] = True
+        obj.lock_scale[2] = True
+        
 # -----------------------------------------------------------------------------
