@@ -8,7 +8,7 @@ The add-on was originally written in C++ for Sketchup under 64-bit Windows10. Fo
 
 The *scripts/sosi_files_importer/* directory contains the sources for the Python code necessary to interface with the WinDLL. The DLL itself is placed in the sub directory *bin/x64/*.
 
-Currently, this addon has only been tested with Blender 3.0 and Windows10.
+Currently, this addon has only been tested with Blender 3.0 and the experimental Blender 3.2 under Windows10.
 
 ![Example import](/images/ImportExample_0.png)
 
@@ -70,4 +70,4 @@ E579843.71
 N6635218.06
 ```
 
-SOSI file ordered from public sources will come with UTM coordinates, which uses the notation Easting and Northing. It is beyond the scope of this document to further dive into this matter. https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system gives a good insight into the UTM system.
+SOSI files ordered from public sources will come with UTM coordinates, which uses the notation Easting and Northing. It is beyond the scope of this document to further dive into this matter. https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system gives a good insight into the UTM system.
